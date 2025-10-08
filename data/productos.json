@@ -1,1 +1,23 @@
-[]
+[
+    {
+      "id": 1,
+      "nombre": "Laptop Gaming",
+      "precio": 1200,
+      "categoria": "Electronicos",
+      "stock": 15
+    },
+    {
+      "id": 2,
+      "nombre": "Smartphone",
+      "precio": 800,
+      "categoria": "Electronicos",
+      "stock": 25
+    },
+    {
+      "id": 3,
+      "nombre": "Auriculares",
+      "precio": 150,
+      "categoria": "Accesorios",
+      "stock": 50
+    }
+  ]

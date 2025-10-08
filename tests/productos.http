@@ -1,0 +1,14 @@
+@baseURL = http://localhost:3000
+@contentType = application/json
+
+### Obtener todos los productos
+GET {{baseURL}}/api/productos
+Content-Type: {{contentType}}
+
+###
+
+### Verificar que server funcione
+GET {{baseURL}}/
+Content-Type: {{contentType}}
+
+###
