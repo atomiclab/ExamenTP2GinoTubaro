@@ -4,4 +4,4 @@ import { productosController } from "../controllers/productosController.js";
 export const productosRouter = express.Router();
 
 // GET /api/productos
-productosRouter.get('/', productosController.getAllProductos);
+productosRouter.get("/", productosController.getAllProductos);

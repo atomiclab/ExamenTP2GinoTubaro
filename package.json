@@ -7,7 +7,9 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon --watch src/ src/app.js",
-    "lint": "eslint src/"
+    "lint": "npx @biomejs/biome check ./src",
+    "format": "npx @biomejs/biome format --write ./src",
+    "linter": "npx @biomejs/biome format --write ./src"
   },
   "author": "Gino Tubaro",
   "license": "ISC",
@@ -16,7 +18,7 @@
     "morgan": "^1.10.1"
   },
   "devDependencies": {
-    "eslint": "^9.37.0",
+    "@biomejs/biome": "^2.2.5",
     "nodemon": "^3.1.10"
   }
 }
