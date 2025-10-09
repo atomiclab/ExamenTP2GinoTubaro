@@ -1,0 +1,9 @@
+### Para el punto 2
+@baseURL = http://localhost:3000
+@contentType = application/json
+
+### Obtener usuarios externos desde API
+GET {{baseURL}}/api/usuarios-externos
+Content-Type: {{contentType}}
+
+###

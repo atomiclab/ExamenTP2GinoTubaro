@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import { productosRouter } from "./routes/productosRoutes.js";
+import { usuariosExternosRouter } from "./routes/usuariosExternosRoutes.js";
 
 const PORT = process.env.PORT ?? "3000";
 const HOST = process.env.HOST ?? "127.0.0.1";
@@ -14,6 +15,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/productos", productosRouter);
+app.use("/api/usuarios-externos", usuariosExternosRouter);
 
 // Ruta de prueba
 app.get("/", (_req, res) => {
