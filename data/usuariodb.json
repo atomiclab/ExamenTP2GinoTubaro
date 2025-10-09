@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "nombre": "Juan Carlos Pérez",
+    "email": "juancarlos@example.com",
+    "telefono": "123-456-7890",
+    "edad": 26,
+    "activo": true,
+    "fechaCreacion": "2025-01-01"
+  },
+  {
+    "id": 2,
+    "nombre": "María García",
+    "email": "maria@example.com",
+    "telefono": "098-765-4321",
+    "edad": 30,
+    "activo": true,
+    "fechaCreacion": "2025-01-02"
+  },
+  {
+    "id": 3,
+    "nombre": "Ana López",
+    "email": "ana@example.com",
+    "telefono": "555-123-4567",
+    "edad": 28,
+    "activo": true,
+    "fechaCreacion": "2025-10-09"
+  }
+]
