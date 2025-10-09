@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import morgan from "morgan";
 import { productosRouter } from "./routes/productosRoutes.js";
@@ -5,8 +6,8 @@ import { usuariosExternosRouter } from "./routes/usuariosExternosRoutes.js";
 import { usuariosRouter } from "./routes/usuariosRoutes.js";
 import { authRouter } from "./routes/authRoutes.js";
 
-const PORT = process.env.PORT ?? "3003";
-const HOST = process.env.HOST ?? "127.0.0.1";
+const PORT = process.env.PORT || 3003;
+const HOST = process.env.HOST || "127.0.0.1";
 
 //PD: No tenemos un archivo .env pedido, pero se puede agregar para no tener que hardcodear los valores superiores.
 
@@ -18,7 +19,7 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.use(morgan("combined"));
+app.use(morgan(process.env.LOG_LEVEL || "combined"));
 app.use(express.json());
 
 // Routes

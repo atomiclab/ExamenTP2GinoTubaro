@@ -19,6 +19,15 @@ API REST desarrollada en Node.js que implementa tres endpoints principales con a
 npm install
 ```
 
+### Configuración de variables de entorno
+```bash
+# Copiar archivo de ejemplo
+cp .env.example .env
+
+# Editar variables según necesidades
+nano .env
+```
+
 ### Ejecutar en desarrollo
 ```bash
 npm run dev
@@ -354,14 +363,41 @@ npm run format   # Formatear código con Biome
 
 ---
 
+## 🔧 **Variables de Entorno**
+
+El proyecto utiliza variables de entorno para configuración. Copia `.env.example` a `.env` y ajusta los valores:
+
+```bash
+# Configuración del servidor
+PORT=3003
+HOST=127.0.0.1
+NODE_ENV=development
+
+# Configuración JWT
+JWT_SECRET=mi_secreto_super_seguro_para_el_examen_gino_tubaro_2025
+JWT_EXPIRES_IN=1h
+
+# Configuración de base de datos
+DB_PATH=./data/usuariodb.json
+PRODUCTOS_PATH=./data/productos.json
+CSV_PATH=./data/usuarios.csv
+
+# API Externa
+EXTERNAL_API_URL=https://raw.githubusercontent.com/Andru-1987/csv_files_ds/refs/heads/main/Video_Games.csv
+
+# Configuración de logging
+LOG_LEVEL=combined
+```
+
 ## 📝 **Notas de Desarrollo**
 
 - **UUID**: Todos los usuarios tienen IDs únicos generados automáticamente
 - **Encriptación**: Las contraseñas se almacenan encriptadas con bcryptjs
-- **JWT**: Tokens con expiración de 1 hora
+- **JWT**: Tokens con expiración configurable via `JWT_EXPIRES_IN`
 - **Validaciones**: Email único, datos requeridos
 - **Logging**: Morgan configurado para logging de requests
 - **Formateo**: Biome configurado para mantener código consistente
+- **Variables de entorno**: Configuración centralizada en `.env`
 
 ---
 

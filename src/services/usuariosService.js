@@ -8,7 +8,7 @@ import { randomUUID } from "node:crypto"; //Extra, fue creado en al branch UUIDi
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const dbPath = path.join(__dirname, "../../data/usuariodb.json");
+const dbPath = process.env.DB_PATH || path.join(__dirname, "../../data/usuariodb.json");
 //Como el punto 2 traemos un CSV que no tiene datos como si fuera una db de usuarios,
 //cree otro archivo que se parezca a una db de usuarios.
 //Como ambos endpoints tratarian de "usuarios", le puse usuariosdb para diferenciarlo.
