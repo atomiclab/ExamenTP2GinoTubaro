@@ -140,3 +140,4 @@ vite.config.ts.timestamp-*
 
 #Mi carpetita de codigos y resumenes
 /inspo
+.DS_Store

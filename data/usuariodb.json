@@ -46,5 +46,15 @@
     "activo": true,
     "fechaCreacion": "2025-10-09",
     "password": null
+  },
+  {
+    "id": "be1022f6-fc4f-437e-937c-7791923bf907",
+    "nombre": "Usuario Postman",
+    "email": "postman@test.com",
+    "telefono": "555-1234",
+    "edad": 25,
+    "activo": true,
+    "fechaCreacion": "2025-10-09",
+    "password": "$2b$10$BeRxdF5w9ZWtEuYMojuF3OqVWtY86r7j0.xrsUcbhse9BheBx/moy"
   }
 ]
