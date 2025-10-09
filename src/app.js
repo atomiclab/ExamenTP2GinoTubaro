@@ -4,7 +4,6 @@ import { productosRouter } from "./routes/productosRoutes.js";
 import { usuariosExternosRouter } from "./routes/usuariosExternosRoutes.js";
 import { usuariosRouter } from "./routes/usuariosRoutes.js";
 
-
 const PORT = process.env.PORT ?? "3003";
 const HOST = process.env.HOST ?? "127.0.0.1";
 
@@ -19,7 +18,6 @@ app.use(express.json());
 app.use("/api/productos", productosRouter);
 app.use("/api/usuarios-externos", usuariosExternosRouter);
 app.use("/api/usuarios", usuariosRouter);
-
 
 // Ruta de prueba
 app.get("/", (_req, res) => {
