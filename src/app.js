@@ -3,6 +3,7 @@ import morgan from "morgan";
 import { productosRouter } from "./routes/productosRoutes.js";
 import { usuariosExternosRouter } from "./routes/usuariosExternosRoutes.js";
 import { usuariosRouter } from "./routes/usuariosRoutes.js";
+import { authRouter } from "./routes/authRoutes.js";
 
 const PORT = process.env.PORT ?? "3003";
 const HOST = process.env.HOST ?? "127.0.0.1";
@@ -11,6 +12,12 @@ const HOST = process.env.HOST ?? "127.0.0.1";
 
 const app = express();
 
+// Middleware para debugguear, se rompio todo intentando poner el jwt
+app.use((req, res, next) => {
+	console.log(`Logging: ${req.method} ${req.originalUrl}`);
+	next();
+});
+
 app.use(morgan("combined"));
 app.use(express.json());
 
@@ -18,12 +25,21 @@ app.use(express.json());
 app.use("/api/productos", productosRouter);
 app.use("/api/usuarios-externos", usuariosExternosRouter);
 app.use("/api/usuarios", usuariosRouter);
+app.use("/api/auth", authRouter);
 
 // Ruta de prueba
 app.get("/", (_req, res) => {
 	res.json({
 		status: 200,
 		message: "API funcionando correctamente",
+	});
+});
+//Ruta no encontrada
+app.use((req, res, next) => {
+	console.log(`❌ Ruta no encontrada: ${req.method} ${req.originalUrl}`);
+	res.status(404).json({
+		success: false,
+		error: `Ruta ${req.method} ${req.originalUrl} no encontrada`
 	});
 });
 

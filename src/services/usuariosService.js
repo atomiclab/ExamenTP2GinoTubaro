@@ -85,6 +85,7 @@ export const usuariosService = {
 				edad: usuarioData.edad || 0,
 				activo: usuarioData.activo !== undefined ? usuarioData.activo : true,
 				fechaCreacion: new Date().toISOString().split("T")[0],
+				password: usuarioData.password || null,
 			};
 
 			result.data.push(newUsuario);
@@ -185,7 +186,6 @@ export const usuariosService = {
 			};
 		}
 	},
-
 	async saveUsuarios(usuarios) {
 		try {
 			await fs.writeFile(dbPath, JSON.stringify(usuarios, null, 2), "utf8");
@@ -194,8 +194,33 @@ export const usuariosService = {
 			return {
 				success: false,
 				error: "Error al guardar usuarios",
-				details: error.message,
+				details: error.message
 			};
 		}
 	},
-};
+	
+	//Buscar usuarios por mail
+	async getUsuarioByEmail(email) {
+		try {
+			const result = await this.getAllUsuarios();
+			if (!result.success) return result;
+	
+			const usuario = result.data.find((u) => u.email === email);
+			if (!usuario) {
+				return {
+					success: false,
+					error: "Usuario no encontrado",
+					code: "USER_NOT_FOUND",
+				};
+			}
+	
+			return { success: true, data: usuario };
+		} catch (error) {
+			return {
+				success: false,
+				error: "Error al buscar usuario",
+				details: error.message,
+			};
+		}
+	}
+	}

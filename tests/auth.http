@@ -1,0 +1,50 @@
+### Variables
+@baseURL = http://localhost:3003
+@contentType = application/json
+@token = 
+
+### Registro de usuario
+POST {{baseURL}}/api/auth/register
+Content-Type: {{contentType}}
+
+{
+  "nombre": "Usuario Demo",
+  "email": "demo@example.com",
+  "password": "123456",
+  "telefono": "555-0000",
+  "edad": 30
+}
+
+###
+
+### Login de usuario y guardar token
+# @name login
+POST {{baseURL}}/api/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "demo@example.com",
+  "password": "123456"
+}
+
+###
+
+### Obtener perfil con token guardado de la prueba Login 
+GET {{baseURL}}/api/auth/profile
+Authorization: Bearer {{login.response.body.data.token}}
+Content-Type: {{contentType}}
+
+###
+
+### Crear usuario (requiere autenticación)
+POST {{baseURL}}/api/usuarios
+Authorization: Bearer {{login.response.body.data.token}}
+Content-Type: {{contentType}}
+
+{
+  "nombre": "Usuario Nuevo",
+  "email": "nuevo@example.com",
+  "telefono": "555-999-8888",
+  "edad": 30,
+  "activo": true
+}

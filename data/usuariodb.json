@@ -16,5 +16,35 @@
     "edad": 30,
     "activo": true,
     "fechaCreacion": "2025-01-02"
+  },
+  {
+    "id": "00dedb6c-5177-46e7-8ad4-2f4e2aa51c08",
+    "nombre": "Test User",
+    "email": "test@example.com",
+    "telefono": "555-1234",
+    "edad": 25,
+    "activo": true,
+    "fechaCreacion": "2025-10-09",
+    "password": "$2b$10$.nKO0edF.RJpKDVJCuJt..Yfp6uFbKqLyogVr/eCr7/H7aMgUG/tm"
+  },
+  {
+    "id": "d37eab7c-3cff-47d3-bba0-e83e6fc80fa7",
+    "nombre": "Usuario Demo",
+    "email": "demo@example.com",
+    "telefono": "555-0000",
+    "edad": 30,
+    "activo": true,
+    "fechaCreacion": "2025-10-09",
+    "password": "$2b$10$GzgKv.qOxzwtdlSvKw.dUORVFhmdCNESDC.mxL5hSnFFR1SwHyq2K"
+  },
+  {
+    "id": "bdd3cd69-c660-46fc-b52d-eeed28ca3555",
+    "nombre": "Usuario Nuevo",
+    "email": "nuevo@example.com",
+    "telefono": "555-999-8888",
+    "edad": 30,
+    "activo": true,
+    "fechaCreacion": "2025-10-09",
+    "password": null
   }
 ]
