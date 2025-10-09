@@ -5,7 +5,7 @@ import { usuariosExternosRouter } from "./routes/usuariosExternosRoutes.js";
 import { usuariosRouter } from "./routes/usuariosRoutes.js";
 
 
-const PORT = process.env.PORT ?? "3000";
+const PORT = process.env.PORT ?? "3003";
 const HOST = process.env.HOST ?? "127.0.0.1";
 
 //PD: No tenemos un archivo .env pedido, pero se puede agregar para no tener que hardcodear los valores superiores.

@@ -3,6 +3,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { randomUUID } from "node:crypto"; //Extra, fue creado en al branch UUIDimplementation, que fue luego mergeada a la main.
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,7 +32,7 @@ export const usuariosService = {
 			const result = await this.getAllUsuarios();
 			if (!result.success) return result;
 
-			const usuario = result.data.find(u => u.id === parseInt(id));
+			const usuario = result.data.find(u => u.id === id);
 			if (!usuario) {
 				return { success: false, error: "Usuario no encontrado", code: "USER_NOT_FOUND" };
 			}
@@ -42,82 +43,81 @@ export const usuariosService = {
 		}
 	},
 
-    async createUsuario(usuarioData) {
-        try {
-            const result = await this.getAllUsuarios();
-            if (!result.success) return result;
-    
-            // Validar email único
-            const emailExists = result.data.some(u => u.email === usuarioData.email);
-            if (emailExists) {
-                return { success: false, error: "El email ya existe", code: "EMAIL_EXISTS" };
-            }
-    
-            // Podria usar spread operator.
-            const maxId = Math.max(...result.data.map(u => u.id), 0);
-            const newUsuario = {
-                id: maxId + 1,
-                nombre: usuarioData.nombre,
-                email: usuarioData.email,
-                telefono: usuarioData.telefono || "",
-                edad: usuarioData.edad || 0,
-                activo: usuarioData.activo !== undefined ? usuarioData.activo : true,
-                fechaCreacion: new Date().toISOString().split('T')[0]
-            };
-    
-            result.data.push(newUsuario);
-            await this.saveUsuarios(result.data);
-    
-            return { success: true, data: newUsuario };
-        } catch (error) {
-            return { success: false, error: "Error al crear usuario", details: error.message };
-        }
-    },
+	async createUsuario(usuarioData) {
+		try {
+			const result = await this.getAllUsuarios();
+			if (!result.success) return result;
+
+			// Validar email único
+			const emailExists = result.data.some(u => u.email === usuarioData.email);
+			if (emailExists) {
+				return { success: false, error: "El email ya existe", code: "EMAIL_EXISTS" };
+			}
+
+			// Generar nuevo UUID
+			const newUsuario = {
+				id: randomUUID(),
+				nombre: usuarioData.nombre,
+				email: usuarioData.email,
+				telefono: usuarioData.telefono || "",
+				edad: usuarioData.edad || 0,
+				activo: usuarioData.activo !== undefined ? usuarioData.activo : true,
+				fechaCreacion: new Date().toISOString().split('T')[0]
+			};
+
+			result.data.push(newUsuario);
+			await this.saveUsuarios(result.data);
+
+			return { success: true, data: newUsuario };
+		} catch (error) {
+			return { success: false, error: "Error al crear usuario", details: error.message };
+		}
+	},
 
     async updateUsuario(id, usuarioData) {
-        try {
-            const result = await this.getAllUsuarios();
-            if (!result.success) return result;
-    
-            const usuarioIndex = result.data.findIndex(u => u.id === parseInt(id));
-            if (usuarioIndex === -1) {
-                return { success: false, error: "Usuario no encontrado", code: "USER_NOT_FOUND" };
-            }
-    
-            // Validar email único (si se está cambiando)
-            if (usuarioData.email && usuarioData.email !== result.data[usuarioIndex].email) {
-                const emailExists = result.data.some(u => u.email === usuarioData.email && u.id !== parseInt(id));
-                if (emailExists) {
-                    return { success: false, error: "El email ya existe", code: "EMAIL_EXISTS" };
-                }
-            }
-    
-            // Actualizar usuario completo, se podria usar un spread operator... 
-            const usuarioActualizado = {
-                id: parseInt(id),
-                nombre: usuarioData.nombre || result.data[usuarioIndex].nombre,
-                email: usuarioData.email || result.data[usuarioIndex].email,
-                telefono: usuarioData.telefono || result.data[usuarioIndex].telefono,
-                edad: usuarioData.edad || result.data[usuarioIndex].edad,
-                activo: usuarioData.activo !== undefined ? usuarioData.activo : result.data[usuarioIndex].activo,
-                fechaCreacion: result.data[usuarioIndex].fechaCreacion
-            };
-    
-            result.data[usuarioIndex] = usuarioActualizado;
-    
-            await this.saveUsuarios(result.data);
-            return { success: true, data: usuarioActualizado };
-        } catch (error) {
-            return { success: false, error: "Error al actualizar usuario", details: error.message };
-        }
-    },
+		try {
+			const result = await this.getAllUsuarios();
+			if (!result.success) return result;
+
+			const usuarioIndex = result.data.findIndex(u => u.id === id);
+			if (usuarioIndex === -1) {
+				return { success: false, error: "Usuario no encontrado", code: "USER_NOT_FOUND" };
+			}
+
+			// Validar email único (si se está cambiando)
+			if (usuarioData.email && usuarioData.email !== result.data[usuarioIndex].email) {
+				const emailExists = result.data.some(u => u.email === usuarioData.email && u.id !== id);
+				if (emailExists) {
+					return { success: false, error: "El email ya existe", code: "EMAIL_EXISTS" };
+				}
+			}
+
+			// Actualizar usuario completo
+			const usuarioActualizado = {
+				id: id,
+				nombre: usuarioData.nombre || result.data[usuarioIndex].nombre,
+				email: usuarioData.email || result.data[usuarioIndex].email,
+				telefono: usuarioData.telefono || result.data[usuarioIndex].telefono,
+				edad: usuarioData.edad || result.data[usuarioIndex].edad,
+				activo: usuarioData.activo !== undefined ? usuarioData.activo : result.data[usuarioIndex].activo,
+				fechaCreacion: result.data[usuarioIndex].fechaCreacion
+			};
+
+			result.data[usuarioIndex] = usuarioActualizado;
+
+			await this.saveUsuarios(result.data);
+			return { success: true, data: usuarioActualizado };
+		} catch (error) {
+			return { success: false, error: "Error al actualizar usuario", details: error.message };
+		}
+	},
 
 	async deleteUsuario(id) {
 		try {
 			const result = await this.getAllUsuarios();
 			if (!result.success) return result;
 
-			const usuarioIndex = result.data.findIndex(u => u.id === parseInt(id));
+			const usuarioIndex = result.data.findIndex(u => u.id === id);
 			if (usuarioIndex === -1) {
 				return { success: false, error: "Usuario no encontrado", code: "USER_NOT_FOUND" };
 			}

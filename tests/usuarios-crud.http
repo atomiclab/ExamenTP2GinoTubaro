@@ -1,21 +1,25 @@
+### Para el punto 3
+@baseURL = http://localhost:3003
+@contentType = application/json
+
 ### Obtener todos los usuarios
-GET http://localhost:3000/api/usuarios
-Content-Type: application/json
+GET {{baseURL}}/api/usuarios
+Content-Type: {{contentType}}
 
 ###
 
-### Obtener usuario por ID
-GET http://localhost:3000/api/usuarios/1
-Content-Type: application/json
+### Obtener usuario por ID (usar UUID real del archivo llamado usuariodb.json)
+GET {{baseURL}}/api/usuarios/550e8400-e29b-41d4-a716-446655440001
+Content-Type: {{contentType}}
 
 ###
 
 ### Crear nuevo usuario
-POST http://localhost:3000/api/usuarios
-Content-Type: application/json
+POST {{baseURL}}/api/usuarios
+Content-Type: {{contentType}}
 
 {
-  "nombre": "Ana López",
+  "nombre": "Ana Lopez",
   "email": "ana@example.com",
   "telefono": "555-123-4567",
   "edad": 28,
@@ -24,20 +28,32 @@ Content-Type: application/json
 
 ###
 
-### Actualizar usuario completo
-PUT http://localhost:3000/api/usuarios/1
-Content-Type: application/json
+### Actualizar usuario completo (usar UUID tmb del archivo usuariodb.json)
+PUT {{baseURL}}/api/usuarios/550e8400-e29b-41d4-a716-446655440001
+Content-Type: {{contentType}}
 
 {
-  "nombre": "Juan Carlos Pérez",
-  "email": "juancarlos@example.com",
+  "nombre": "Juan Carlos Perez Actualizado",
+  "email": "juancarlos.actualizado@example.com",
   "telefono": "123-456-7890",
-  "edad": 26,
+  "edad": 27,
   "activo": true
 }
 
 ###
 
-### Eliminar usuario
-DELETE http://localhost:3000/api/usuarios/3
-Content-Type: application/json
+### Eliminar usuario (adios Juan carlos!)
+DELETE {{baseURL}}/api/usuarios/550e8400-e29b-41d4-a716-446655440001
+Content-Type: {{contentType}}
+
+### Volvemos a crear a Juan Carlos! pero su UUID es diferente al de la eliminacion.
+POST {{baseURL}}/api/usuarios
+Content-Type: {{contentType}}
+
+{
+  "nombre": "Juan Carlos Perez",
+  "email": "juancarlos@example.com",
+  "telefono": "123-456-7890",
+  "edad": 25,
+  "activo": true
+}
