@@ -194,17 +194,17 @@ export const usuariosService = {
 			return {
 				success: false,
 				error: "Error al guardar usuarios",
-				details: error.message
+				details: error.message,
 			};
 		}
 	},
-	
+
 	//Buscar usuarios por mail
 	async getUsuarioByEmail(email) {
 		try {
 			const result = await this.getAllUsuarios();
 			if (!result.success) return result;
-	
+
 			const usuario = result.data.find((u) => u.email === email);
 			if (!usuario) {
 				return {
@@ -213,7 +213,7 @@ export const usuariosService = {
 					code: "USER_NOT_FOUND",
 				};
 			}
-	
+
 			return { success: true, data: usuario };
 		} catch (error) {
 			return {
@@ -222,5 +222,5 @@ export const usuariosService = {
 				details: error.message,
 			};
 		}
-	}
-	}
+	},
+};

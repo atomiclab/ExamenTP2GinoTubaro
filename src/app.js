@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 	console.log(`❌ Ruta no encontrada: ${req.method} ${req.originalUrl}`);
 	res.status(404).json({
 		success: false,
-		error: `Ruta ${req.method} ${req.originalUrl} no encontrada`
+		error: `Ruta ${req.method} ${req.originalUrl} no encontrada`,
 	});
 });
 
